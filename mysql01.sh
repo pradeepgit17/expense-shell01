@@ -25,4 +25,4 @@ else
 fi 
 
 dnf install mysql-server -y
-VALIDATE $? ""installing the mysql"
+VALIDATE $? "installing the mysql"
