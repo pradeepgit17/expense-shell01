@@ -10,6 +10,7 @@ Y="\e[33m"
 N="\e[0m"
 echo "enter the db password"
 read mysql_root_password
+#ExpenseApp@1
 
 VALIDATE(){
 
@@ -62,7 +63,7 @@ VALIDATE $? "Extracted backend code"
 npm install &>>$LOGFILE
 VALIDATE $? "Installing nodejs dependencies"
 
-cp /home/ec2-user/expense-shell01 /etc/systemd/system/backend.service &>>$LOGFILE
+cp /home/ec2-user/expense-shell01/etc/systemd/system/backend.service &>>$LOGFILE
 VALIDATE $? "Copied backend service"
 
 systemctl daemon-reload &>>$LOGFILE
