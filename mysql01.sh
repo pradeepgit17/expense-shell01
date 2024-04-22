@@ -9,6 +9,8 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+echo "enter the db password"
+read mysql_root_password
 
 VALIDATE(){
 
@@ -34,10 +36,22 @@ dnf install mysql-server -y &>>$LOGFILE
 VALIDATE $? "installing the mysql"
 
 systemctl enable mysqld &>>$LOGFILE
-VALIDATE $? "enabling the  mysql"
+VALIDATE $? "enabling the mysql"
 
 systemctl start mysqld &>>$LOGFILE
-VALIDATE $? "starting the  mysql"
+VALIDATE $? "starting the mysql"
+
+mysql -h db.pradeep17.online -uroot -p${mysql_root_password} -e 'show databases;' &>>$LOGFILE
+
+if [ $? -ne 0 ]
+then 
+   mysql_secure_installation --set-root-pass ${mysql_root_passwordsql_root_password}
+       VALIDATE $? "MySQL Root password Setup"
+else
+    echo -e "MySQL Root password is already setup...$Y SKIPPING $N"
+fi
+
+
 
 
 
